@@ -2,10 +2,11 @@
   "name": "roman-numerals",
   "version": "1.0.0",
   "description": "Convert decimals to Roman Numerals",
+  "repository": "https://github.com/wildlyinaccurate/roman-numeral-converter.git",
   "main": "index.js",
   "scripts": {
     "test": "node test.js"
   },
-  "author": "",
+  "author": "Joseph Wynn <joseph@wildlyinaccurate.com>",
   "license": "MIT"
 }
