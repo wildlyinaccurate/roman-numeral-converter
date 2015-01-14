@@ -81,6 +81,11 @@ RomanNumeralGenerator.prototype.parse = function(numeral) {
         }
     });
 
+    if (numeral.length > 0) {
+        // Extraneous characters after parsing; must be an invalid numeral
+        throw new Error('Invalid roman numeral supplied');
+    }
+
     return decimalValue;
 };
 

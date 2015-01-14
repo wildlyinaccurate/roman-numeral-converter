@@ -24,6 +24,7 @@ assert.equal(38, generator.parse('XXXVIII'));
 assert.equal(67, generator.parse('LXVII'));
 assert.equal(707, generator.parse('DCCVII'));
 assert.equal(3999, generator.parse('MMMCMXCIX'));
+assert.throws(generator.parse.bind(generator, 'IVX'), Error);
 assert.throws(generator.parse.bind(generator, 'nulla'), Error);
 assert.throws(generator.parse.bind(generator, 'FOO'), Error);
 assert.throws(generator.parse.bind(generator, 'XOOPS'), Error);
