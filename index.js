@@ -1,7 +1,7 @@
-function DecimalToNumeral() {}
+function RomanNumeralGenerator() {}
 
-DecimalToNumeral.prototype.MAX_DECIMAL_VALUE = 3999;
-DecimalToNumeral.prototype.mapping = {
+RomanNumeralGenerator.prototype.MAX_DECIMAL_VALUE = 3999;
+RomanNumeralGenerator.prototype.mapping = {
     1: 'I',
     4: 'IV',
     5: 'V',
@@ -23,7 +23,7 @@ DecimalToNumeral.prototype.mapping = {
  * @param  {number} decimal
  * @return {string}
  */
-DecimalToNumeral.prototype.generate = function(decimal) {
+RomanNumeralGenerator.prototype.generate = function(decimal) {
     if (decimal > this.MAX_DECIMAL_VALUE) {
         throw new Error('Unable to convert numbers larger than ' + this.MAX_DECIMAL_VALUE);
     }
@@ -62,4 +62,4 @@ function sortNumeric(a, b) {
     return a - b;
 }
 
-module.exports = new DecimalToNumeral();
+module.exports = new RomanNumeralGenerator();
