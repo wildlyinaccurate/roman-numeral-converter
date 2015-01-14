@@ -1,8 +1,5 @@
 function RomanNumeralGenerator() {}
 
-// The only edge case is zero, which is 'nulla' (literally 'none' in Latin)
-RomanNumeralGenerator.prototype.ZERO = 'nulla';
-
 RomanNumeralGenerator.prototype.MAX_DECIMAL_VALUE = 3999;
 RomanNumeralGenerator.prototype.mapping = {
     1: 'I',
@@ -44,12 +41,8 @@ RomanNumeralGenerator.prototype.generate = function(decimal) {
         throw new Error('Unable to convert numbers larger than ' + this.MAX_DECIMAL_VALUE);
     }
 
-    if (decimal < 0) {
-        throw new Error('Unable to generate roman numerals below zero.');
-    }
-
-    if (decimal === 0) {
-        return this.ZERO;
+    if (decimal <= 0) {
+        throw new Error('Unable to generate roman numerals for zero or below.');
     }
 
     var mapping = this.mapping;
@@ -72,10 +65,6 @@ RomanNumeralGenerator.prototype.generate = function(decimal) {
  * @return {Number}
  */
 RomanNumeralGenerator.prototype.parse = function(numeral) {
-    if (numeral === this.ZERO) {
-        return 0;
-    }
-
     if (typeof numeral !== 'string' || numeral.match(/[^IVXLCDM]/)) {
         throw new Error('Invalid roman numeral supplied.');
     }
