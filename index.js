@@ -42,7 +42,7 @@ RomanNumeralGenerator.prototype.generate = function(decimal) {
     }
 
     if (decimal <= 0) {
-        throw new Error('Unable to generate roman numerals for zero or below.');
+        throw new Error('Unable to generate roman numerals for zero or below');
     }
 
     var mapping = this.mapping;
@@ -66,7 +66,7 @@ RomanNumeralGenerator.prototype.generate = function(decimal) {
  */
 RomanNumeralGenerator.prototype.parse = function(numeral) {
     if (typeof numeral !== 'string' || numeral.match(/[^IVXLCDM]/)) {
-        throw new Error('Invalid roman numeral supplied.');
+        throw new Error('Invalid roman numeral supplied');
     }
 
     var mapping = this.mapping;
