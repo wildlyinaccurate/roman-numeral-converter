@@ -1,8 +1,11 @@
 var assert = require('assert');
 var generator = require('./index');
 
+// RomanNumeralGenerator#generate
+assert.equal('nulla', generator.generate(0));
 assert.equal('I', generator.generate(1));
 assert.equal('II', generator.generate(2));
+assert.equal('X', generator.generate(10));
 assert.equal('XIII', generator.generate(13));
 assert.equal('XXXVIII', generator.generate(38));
 assert.equal('LXVII', generator.generate(67));
