@@ -1,5 +1,8 @@
 function RomanNumeralGenerator() {}
 
+// The only edge case is zero, which is 'nulla' (literally 'none' in Latin)
+RomanNumeralGenerator.prototype.ZERO = 'nulla';
+
 RomanNumeralGenerator.prototype.MAX_DECIMAL_VALUE = 3999;
 RomanNumeralGenerator.prototype.mapping = {
     1: 'I',
@@ -18,10 +21,23 @@ RomanNumeralGenerator.prototype.mapping = {
 };
 
 /**
+ * Iterate over each mapping, in reverse numerical order, calling {callback} on each value
+ *
+ * @param {Function} callback
+ */
+RomanNumeralGenerator.prototype.eachMapping = function(callback) {
+    var numeralValues = Object.keys(this.mapping)
+                              .sort(sortNumeric)
+                              .reverse();
+
+    numeralValues.forEach(callback);
+};
+
+/**
  * Convert an integer to roman numeral
  *
- * @param  {number} decimal
- * @return {string}
+ * @param  {Number} decimal
+ * @return {String}
  */
 RomanNumeralGenerator.prototype.generate = function(decimal) {
     if (decimal > this.MAX_DECIMAL_VALUE) {
@@ -33,16 +49,13 @@ RomanNumeralGenerator.prototype.generate = function(decimal) {
     }
 
     if (decimal === 0) {
-        // The only edge case; 'nulla' is written to represent zero (literally
-        // 'none' in latin)
-        return 'nulla';
+        return this.ZERO;
     }
 
     var mapping = this.mapping;
-    var numeralValues = Object.keys(mapping).sort(sortNumeric).reverse();
     var numeral = '';
 
-    numeralValues.forEach(function(value) {
+    this.eachMapping(function(value) {
         while (decimal >= value) {
             decimal = decimal - value;
             numeral = numeral + mapping[value];
@@ -50,6 +63,36 @@ RomanNumeralGenerator.prototype.generate = function(decimal) {
     });
 
     return numeral;
+};
+
+/**
+ * Convert a roman numeral to an integer
+ *
+ * @param  {String} numeral
+ * @return {Number}
+ */
+RomanNumeralGenerator.prototype.parse = function(numeral) {
+    if (numeral === this.ZERO) {
+        return 0;
+    }
+
+    if (typeof numeral !== 'string' || numeral.match(/[^IVXLCDM]/)) {
+        throw new Error('Invalid roman numeral supplied.');
+    }
+
+    var mapping = this.mapping;
+    var decimalValue = 0;
+
+    this.eachMapping(function(value) {
+        var n = mapping[value];
+
+        while (numeral.substr(0, n.length) === n) {
+            numeral = numeral.substr(n.length);
+            decimalValue = decimalValue + Number(value);
+        }
+    });
+
+    return decimalValue;
 };
 
 /**

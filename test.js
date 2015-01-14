@@ -14,6 +14,18 @@ assert.equal('MMMCMXCIX', generator.generate(3999));
 assert.throws(generator.generate.bind(generator, 4000), Error);
 assert.throws(generator.generate.bind(generator, -1), Error);
 
-
+// RomanNumeralGenerator#parse
+assert.equal(0, generator.parse('nulla'));
+assert.equal(1, generator.parse('I'));
+assert.equal(2, generator.parse('II'));
+assert.equal(10, generator.parse('X'));
+assert.equal(13, generator.parse('XIII'));
+assert.equal(38, generator.parse('XXXVIII'));
+assert.equal(67, generator.parse('LXVII'));
+assert.equal(707, generator.parse('DCCVII'));
+assert.equal(3999, generator.parse('MMMCMXCIX'));
+assert.throws(generator.parse.bind(generator, 'FOO'), Error);
+assert.throws(generator.parse.bind(generator, 'XOOPS'), Error);
+assert.throws(generator.parse.bind(generator, 42), Error);
 
 console.log('All tests passed!');
