@@ -8,5 +8,8 @@
     "test": "node test.js"
   },
   "author": "Joseph Wynn <joseph@wildlyinaccurate.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "restify": "^2.8.4"
+  }
 }
